@@ -1,0 +1,15 @@
+import pandas as pd
+import numpy as np
+import sys
+import xlrd
+from pandas import DataFrame
+#excel分表
+sheeta=pd.read_excel("14322.xlsx",sheet_name="Sheet1")
+df =pd.DataFrame(sheeta,columns=['地市','mobile','erp已缴费','name','地市2','orgn_name','owner_name'
+])
+print(df)
+#按“地市2”列进行分表，并单独保存为独立的Excel表格
+de = df.groupby("地市2").apply(
+    lambda x: x.to_excel(f'{x.name}-需对接.xlsx',index=False)
+)
+print("分表完成")
